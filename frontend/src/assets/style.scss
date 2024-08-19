@@ -1,0 +1,40 @@
+// Load custom variables
+@use './fonts.scss' as *;
+@use './custom_variables.scss' as *;
+
+// Replace Bulma's default variables with custom ones
+@use 'bulma/sass/utilities' with (
+  $primary: $gevo-green-light,
+  $link: $gevo-ochre,
+  $info: $gevo-blue,
+  $success: $gevo-green,
+  $warning: $gevo-orange,
+  $danger: $gevo-red,
+  $family-primary: $gevo-font,
+  $family-secondary: $gevo-font,
+  $family-sans-serif: $gevo-font
+);
+
+// Load Bulma's components
+@forward 'bulma/sass/elements/block';
+@forward 'bulma/sass/elements/button';
+@forward 'bulma/sass/elements/image';
+@forward 'bulma/sass/elements/icon';
+@forward 'bulma/sass/elements/notification';
+
+// Load Bulma's layout
+@forward 'bulma/sass/layout/section';
+@forward 'bulma/sass/layout/container';
+
+// Load Bulma's base styles and themes (including the minireset)
+@forward 'bulma/sass/base';
+@forward 'bulma/sass/themes';
+
+// Load Bulma's grid system
+@forward 'bulma/sass/grid/columns';
+
+// Custom styles
+hr.login-separator {
+  border-bottom: 2px solid utilities.$grey-lighter;
+  width: 4rem;
+}

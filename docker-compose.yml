@@ -1,0 +1,51 @@
+services:
+  frontend:
+    build:
+      context: frontend
+    container_name: frontend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - rp_gevo
+    depends_on:
+      backend:
+        condition: service_started
+
+  backend:
+    build:
+      context: backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - rp_gevo
+    depends_on:
+      db:
+        condition: service_started
+        restart: true
+
+  db:
+    image: mysql
+    restart: always
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - rp_gevo
+
+volumes:
+  db:
+
+networks:
+  rp_gevo:
+    driver: bridge
